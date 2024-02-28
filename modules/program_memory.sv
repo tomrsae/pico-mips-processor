@@ -15,9 +15,9 @@ module program_memory #(
     logic [InstructionSz-1:0] rom [0:(1 << AddrSz) - 1]; 
 
     initial
-        $readmemh("../program.hex", rom);
+        $readmemh("program.hex", rom);
 
     always_comb
-        instruction = rom[address]
+        instruction = rom[address];
 
 endmodule
