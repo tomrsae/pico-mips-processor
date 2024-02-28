@@ -1,10 +1,10 @@
 // File: pc.sv
 // Author: Tommy Sætre
 // Description: Program counter, facilitating relative branching and incrementing
-// Last revision: 27/02/24
+// Last revision: 28/02/24
 
 module pc #(parameter AddrSz = 6) (
-    input logic rel_branch, clk, n_reset
+    input logic rel_branch, clk, n_reset,
     input logic [AddrSz-1:0] offset,
     output logic [AddrSz-1:0] addr
 );

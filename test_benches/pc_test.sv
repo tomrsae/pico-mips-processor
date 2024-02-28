@@ -14,7 +14,11 @@ initial begin
     n_reset = 1;
     #10ns
     n_reset = 0;
+	#10ns
+	n_reset = 1;
 
+	rel_branch = 0;
+	offset = 0;
     clk = 0;
     forever #5ns clk = ~clk;
 end
@@ -35,8 +39,6 @@ initial begin
     rel_branch = 1;
     #10ns
     rel_branch = 0;
-
-    #50ns
 end
 
 endmodule
