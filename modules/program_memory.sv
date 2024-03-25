@@ -1,12 +1,12 @@
 // File: reg_file.sv
 // Author: Tommy Sætre
 // Description: Simple program memory implementation, program is read from a static file
-// Last revision: 27/02/24
+// Last revision: 24/03/24
 
 module program_memory #(
     parameter N = 8,
     parameter AddrSz = 6,
-    localparam InstructionSz = N + 16 // 16-bit immediate
+    parameter InstructionSz = 24
 ) (
     input logic [AddrSz-1:0] address,
     output logic [InstructionSz-1:0] instruction

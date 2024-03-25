@@ -6,9 +6,9 @@
 module reg_file #(
     parameter M = 32,
     parameter N = 8,
-    localparam addrSz = $clog2(M)
+    localparam AddrSz = $clog2(M)
 ) (
-    input logic [addrSz-1:0] Rd, Rs,
+    input logic [AddrSz-1:0] Rd, Rs,
     input logic [N-1:0] Wdata,
     input logic w_enable, clk,
     output logic [N-1:0] Rd_data, Rs_data

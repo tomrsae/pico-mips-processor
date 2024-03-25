@@ -4,11 +4,12 @@ module program_memory_test;
 
 parameter N = 8;
 parameter AddrSz = 6;
+parameter InstructionSz = 24;
 
 logic [AddrSz-1:0] address;
-logic [N+15:0] instruction;
+logic [InstructionSz-1:0] instruction;
 
-program_memory #(.N(N), .AddrSz(AddrSz)) mem (.*);
+program_memory #(.N(N), .AddrSz(AddrSz), .InstructionSz(InstructionSz)) mem (.*);
 
 initial begin
     address = 0;
