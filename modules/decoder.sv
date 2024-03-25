@@ -33,7 +33,7 @@ module decoder (
             `BNQ : pc_rel_branch = ~ZF;
             `JMP : pc_rel_branch = 1;
             `MULT: begin
-                reg_write = 1;
+                reg_write = 1; // ASUMMES MULTIPLICATION COMPLETES IN SINGLE CYCLE
                 mult = 1;
             end
             `STIN: begin
