@@ -96,39 +96,39 @@ module decoder_test;
     end
  
     assert property (ADDsetsALUandRegWrite)
-    else $("ADDsetsALUandRegWrite not satisfied");
+    else $error("ADDsetsALUandRegWrite not satisfied");
 
     assert property (SUBsetsALUandRegWrite)
-    else $("SUBsetsALUandRegWrite not satisfied");
+    else $error("SUBsetsALUandRegWrite not satisfied");
 
     assert property (ADDIsetsALUandImmediateandRegWrite)
-    else $("ADDIsetsALUandImmediateandRegWrite not satisfied");
+    else $error("ADDIsetsALUandImmediateandRegWrite not satisfied");
 
     assert property (SUBIsetsALUandImmediateandRegWrite)
-    else $("SUBIsetsALUandImmediateandRegWrite not satisfied");
+    else $error("SUBIsetsALUandImmediateandRegWrite not satisfied");
 
     assert property (BEQandZFsetsPcRelBranch)
-    else $("BEQandZFsetsPcRelBranch not satisfied");
+    else $error("BEQandZFsetsPcRelBranch not satisfied");
 
     assert property (BEQandNotZFdoesNotSetPcRelBranch)
-    else $("BEQandNotZFdoesNotSetPcRelBranch not satisfied");
+    else $error("BEQandNotZFdoesNotSetPcRelBranch not satisfied");
 
     assert property (BNQandZFsetsPcRelBranch)
-    else $("BNQandZFsetsPcRelBranch not satisfied");
+    else $error("BNQandZFsetsPcRelBranch not satisfied");
 
     assert property (BNQandNotZFdoesNotSetPcRelBranch)
-    else $("BNQandNotZFdoesNotSetPcRelBranch not satisfied");
+    else $error("BNQandNotZFdoesNotSetPcRelBranch not satisfied");
 
     assert property (JMPsetsPcRelBranch)
-    else $("JMPsetsPcRelBranch not satisfied");
+    else $error("JMPsetsPcRelBranch not satisfied");
 
     assert property (MULTsetsMultandRegWrite)
-    else $("MULTsetsMultandRegWrite not satisfied");
+    else $error("MULTsetsMultandRegWrite not satisfied");
 
     assert property (STINsetsReadInandRegWrite)
-    else $("STINsetsReadInandRegWrite not satisfied");
+    else $error("STINsetsReadInandRegWrite not satisfied");
 
     assert property (LOUTsetsWriteOut)
-    else $("LOUTsetsWriteOut not satisfied");
+    else $error("LOUTsetsWriteOut not satisfied");
 
 endmodule

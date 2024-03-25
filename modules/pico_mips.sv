@@ -7,27 +7,15 @@
 //  Capable of running programs consisting of MaxProgramSz instructions.
 // Last revision: 24/03/24
 
-`include "alucodes.sv"
-`include "alu.sv"
-`include "decoder.sv"
-`include "opcodes.sv"
-`include "pc.sv"
-`include "pico_mips.sv"
-`include "program_memory.sv"
-`include "reg_file.sv"
-`include "sync_ram.sv"
-`include "sync_smult.sv"
-`include "register.sv"
-
 module pico_mips #(
-    parameter N = 8
+    parameter N = 8,
     parameter InBusSz = 10,
     parameter MaxProgramSz = 64,
     parameter ImmediateSz = 16,
     localparam ProgramAddrSz = $clog2(MaxProgramSz),
     localparam InstructionSz = N + ImmediateSz
 ) (
-    input logic [inBusSz-1:0] in_bus,
+    input logic [InBusSz-1:0] in_bus,
     input logic clk, n_reset,
     output logic [N-1:0] out_bus
 );
@@ -64,7 +52,7 @@ module pico_mips #(
     reg_file #(.N(N), .M(32)) reg_file (.Rd(rd), .Rs(rs), .Wdata(reg_write_data), .w_enable(reg_write), .clk(clk),
         .Rd_data(rd_data), .Rs_data(rs_data));
     alu #(.N(N)) alu (.a(alu_a), .b(alu_b), .func(alu_func), .result(alu_result), .ZF(alu_ZF));
-    register #(.N(N)) register (.D(alu_result), .clk(write_out_bus), .n_reset(n_reset), .Q(out_bus));
+    register #(.N(N)) output_register (.D(alu_result), .clk(write_out_bus), .n_reset(n_reset), .Q(out_bus));
 
 
 endmodule

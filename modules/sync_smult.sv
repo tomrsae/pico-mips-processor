@@ -5,11 +5,11 @@
 
 module sync_smult #(parameter N=8) (
     input logic [N-1:0] a, b,
-    input logic clk
+    input logic clk,
     output logic [2*N-1:0] result
 );
-    signed logic [N-1:0] ra, rb;
-    signed logic [2*N-1:0] rresult;
+    logic signed [N-1:0] ra, rb;
+    logic signed [2*N-1:0] rresult;
 
     assign rresult = ra * rb;
 

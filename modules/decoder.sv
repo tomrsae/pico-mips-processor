@@ -19,8 +19,8 @@ module decoder (
         reg_write = 0;
         immediate = 0;
         mult = 0;
-        readin = 0;
-        writeout = 0;
+        read_in = 0;
+        write_out = 0;
 
         unique case (opcode)
             `NOP : ;

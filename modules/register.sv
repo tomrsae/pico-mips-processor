@@ -1,6 +1,6 @@
 module register #(parameter N = 8) (
     input logic [N-1:0] D,
-    input logic clk, n_reset
+    input logic clk, n_reset,
     output logic [N-1] Q
 );
 
