@@ -27,7 +27,7 @@ module decoder_test;
     endproperty
 
     property SUBIsetsALUandImmediateandRegWrite;
-        opdcode == `SUBI |-> (alu_func == `RSUB && immediate && reg_write);
+        opcode == `SUBI |-> (alu_func == `RSUB && immediate && reg_write);
     endproperty
 
     property BEQandZFsetsPcRelBranch;
