@@ -6,7 +6,7 @@
 `include "alucodes.sv"
 
 module alu #(parameter N = 8) (
-    input logic [N-1:0] a, b,
+    input logic signed [N-1:0] a, b,
     input logic [2:0] func,
     output logic [N-1:0] result,
     output logic ZF
@@ -19,6 +19,11 @@ module alu #(parameter N = 8) (
         arithmetic_result = a + temp;
     end
 
+    logic signed [2*N-1:0] smult_result;
+    always_comb begin
+        smult_result = a * b;
+    end
+
     always_comb begin
         unique case (func)
             `RA:    result = a;
@@ -28,7 +33,7 @@ module alu #(parameter N = 8) (
             `RAND:  result = a & b;
             `ROR:   result = a | b;
             `RXOR:  result = a ^ b;
-            `RNOR:  result = ~(a | b);
+            `RMUL:  result = smult_result[2*N-1:N];
         endcase
     end
 

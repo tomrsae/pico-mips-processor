@@ -11,4 +11,4 @@
 `define RAND    3'b100
 `define ROR     3'b101
 `define RXOR    3'b110
-`define RNOR    3'b111
+`define RMUL    3'b111

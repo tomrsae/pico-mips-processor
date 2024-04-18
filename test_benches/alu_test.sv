@@ -28,7 +28,7 @@ initial begin
     #10ns func = `RAND;
     #10ns func = `ROR; 
     #10ns func = `RXOR;
-    #10ns func = `RNOR;
+    #10ns func = `RMUL;
     #10ns
     a = b;
     func = `RSUB;
@@ -70,8 +70,8 @@ property RXORxors;
     func == `RXOR |-> result == (a ^ b);
 endproperty
 
-property RNORnors;
-    func == `RNOR |-> result == ~(a | b);
+property RMULmults;
+    func == `RMUL |-> result == (a * b);
 endproperty
 
 assert property (ZFisSetOnZero)
@@ -98,7 +98,7 @@ else $error("Property RORors not satisfied");
 assert property (RXORxors)
 else $error("Property RXORxors not satisfied");
 
-assert property (RNORnors)
-else $error("Property RNORnors not satisfied");
+assert property (RMULmults)
+else $error("Property RMULmults not satisfied");
 
 endmodule
