@@ -4,7 +4,7 @@ module pc_test;
 
 parameter AddrSz = 6;
 
-logic rel_branch, clk, n_reset;
+logic rel_branch, clk, n_reset, halt;
 logic [AddrSz-1:0] offset;
 logic [AddrSz-1:0] addr;
 
@@ -31,6 +31,10 @@ assert property (
     @(posedge clk) (rel_branch |=> addr == $past(addr) + offset)
 ) else $error("PC did not add relative branch offset");
 
+assert property (
+    @(posedge clk) (halt |=> addr == $past(addr))
+) else $error("PC did not halt");
+
 initial begin
 
     #50ns
@@ -39,6 +43,12 @@ initial begin
     rel_branch = 1;
     #10ns
     rel_branch = 0;
+    #10ns
+    halt = 1;
+    #50ns
+    halt = 0;
+    
+    #50ns
 end
 
 endmodule
