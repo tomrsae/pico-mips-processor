@@ -6,7 +6,7 @@ module decoder_test;
 
     logic [5:0] opcode;
     logic [2:0] alu_func;
-    logic pc_rel_branch, reg_write, immediate, mult, read_in, write_out, ZF, clk;
+    logic pc_rel_branch, reg_write, immediate, read_in, write_out, ZF, clk;
 
     decoder decoder (.*);
 
@@ -50,8 +50,8 @@ module decoder_test;
         opcode == `JMP |-> pc_rel_branch;
     endproperty
 
-    property MULTsetsMultandRegWrite;
-        opcode == `MULT |-> (mult && reg_write);
+    property MULTsetsRegWrite;
+        opcode == `MULT |-> (reg_write);
     endproperty
 
     property STINsetsReadInandRegWrite;
@@ -122,8 +122,8 @@ module decoder_test;
     assert property (JMPsetsPcRelBranch)
     else $error("JMPsetsPcRelBranch not satisfied");
 
-    assert property (MULTsetsMultandRegWrite)
-    else $error("MULTsetsMultandRegWrite not satisfied");
+    assert property (MULTsetsRegWrite)
+    else $error("MULTsetsRegWrite not satisfied");
 
     assert property (STINsetsReadInandRegWrite)
     else $error("STINsetsReadInandRegWrite not satisfied");

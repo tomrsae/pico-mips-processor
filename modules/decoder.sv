@@ -10,7 +10,7 @@ module decoder (
     input logic ZF,
     input logic [5:0] opcode,
     output logic [2:0] alu_func,
-    output logic pc_rel_branch, reg_write, immediate, mult, read_in, write_out
+    output logic pc_rel_branch, reg_write, immediate, read_in, write_out
 );
     assign alu_func = opcode[2:0];
 
@@ -18,7 +18,6 @@ module decoder (
         pc_rel_branch = 0;
         reg_write = 0;
         immediate = 0;
-        mult = 0;
         read_in = 0;
         write_out = 0;
 
@@ -32,10 +31,7 @@ module decoder (
             `BEQ : pc_rel_branch = ZF;
             `BNQ : pc_rel_branch = ~ZF;
             `JMP : pc_rel_branch = 1;
-            `MULT: begin
-                reg_write = 1; // ASUMMES MULTIPLICATION COMPLETES IN SINGLE CYCLE
-                mult = 1;
-            end
+            `MULT: reg_write = 1; 
             `STIN: begin
                 reg_write = 1;
                 read_in = 1;
