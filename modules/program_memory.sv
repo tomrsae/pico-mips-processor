@@ -12,10 +12,10 @@ module program_memory #(
     output logic [InstructionSz-1:0] instruction
 );
 
-    logic [InstructionSz-1:0] rom [0:(1 << AddrSz) - 1]; 
+    logic [InstructionSz-1:0] rom [0:(1 << AddrSz) - 1];
 
     initial
-        $readmemh("program.hex", rom);
+        $readmemh("../program.hex", rom);
 
     always_comb
         instruction = rom[address];

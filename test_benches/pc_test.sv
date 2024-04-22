@@ -8,7 +8,7 @@ logic rel_branch, clk, n_reset, halt;
 logic [AddrSz-1:0] offset;
 logic [AddrSz-1:0] addr;
 
-pc #(.AddrSz(AddrSz)) pc1 (.*);
+pc #(.AddrSz(AddrSz)) pc (.*);
 
 initial begin
     n_reset = 1;
@@ -17,6 +17,7 @@ initial begin
 	#10ns
 	n_reset = 1;
 
+    halt = 0;
 	rel_branch = 0;
 	offset = 0;
     clk = 0;
@@ -24,11 +25,11 @@ initial begin
 end
 
 assert property (
-    @(posedge clk) (!rel_branch |=> addr == $past(addr) + 1)
+    @(posedge clk) (!rel_branch && !halt |=> addr == $past(addr) + 1)
 ) else $error("PC did not increment despite relative branching being disabled");
 
 assert property (
-    @(posedge clk) (rel_branch |=> addr == $past(addr) + offset)
+    @(posedge clk) (rel_branch && !halt |=> addr == $past(addr) + offset)
 ) else $error("PC did not add relative branch offset");
 
 assert property (
@@ -47,8 +48,9 @@ initial begin
     halt = 1;
     #50ns
     halt = 0;
-    
+
     #50ns
+    $display("complete");
 end
 
 endmodule
