@@ -1,8 +1,42 @@
 // File: program.hex
 // Author: Tommy Sætre
-// Description: Currently a test program
-// Last revision: 27/02/24
+// Description: Affine transformation algorithm
+// Last revision: 20/04/24
 
-123456  // Some
-654321  // Cool
-BABE00  // Comment
+/// Read inputs
+
+802000 // STIN %01 <-- x1 in register 1
+804000 // STIN %02 <-- y1 in register 2
+
+/// Perform transformation
+
+// All members of A matrix are considered as fractional numbers
+// A11 = 0.5    = 0b010000000 = 0x40
+// A12 = -0.875 = 0b100100000 = 0x90
+// A21 = -0.875 = 0b100100000 = 0x90
+// A22 = 0.75   = 0b011000000 = 0x60
+
+// All members of b vector are considered as whole numbers
+// b1 = 5       = 0b000000101 = 0x05
+// b2 = 12      = 0b000001100 = 0x0C
+
+// [x2, y2] = A * [x1, y1] + B
+
+7C6140 // MLTI %03 %01 0x40
+7C8290 // MLTI %04 %02 0x90
+08A320 // ADD %05 %03 %04
+28C505 // ADDI %06 %05 0x05 <-- x2 in register 6
+
+7C6190 // MLTI %03 %01 0x90
+7C8260 // MLTI %04 %02 0x60
+08A320 // ADD %05 %03 %04
+28E50C // ADDI %07 %05 0x0C <-- y2 in register 7
+
+/// Write to output
+
+600600 // LOUT %06
+600700 // LOUT %07
+
+/// Goto first instruction
+
+23FFF4 // JMP 0x3FFF4
