@@ -31,9 +31,15 @@ initial begin
     #10ns
     a = 20;
     b = 8'b11100000; // -0.25
-    func = `RMUL;
+    func = `RMLT;
     #10ns
-    assert (result == 8'b11111011 /* -5 */) else $error("RMUL failed");
+    assert (result == 8'b11111011 /* -5 */) else $error("RMLT failed");
+    #10ns
+    a = 8'h21; // 33
+    b = 8'h90; // -0.875
+    func = `RMLT;
+    #10ns
+    assert (result == 8'b11100011 /* -29 */) else $error("RMLT failed");
     #10ns
     a = b;
     func = `RSUB;

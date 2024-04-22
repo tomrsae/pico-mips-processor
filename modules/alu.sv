@@ -1,7 +1,7 @@
 // File: alu.sv
-// Author: Tommy SÃ¦tre
+// Author: Tommy Sætre
 // Description: N-bit arithmetic logic unit
-// Last revision: 18/04/24
+// Last revision: 20/04/24
 
 `include "alucodes.sv"
 
@@ -19,6 +19,7 @@ module alu #(parameter N = 8) (
         arithmetic_result = a + temp;
     end
 
+    // Ensure signed multiplication is used
     logic signed [2*N-1:0] smult_result;
     always_comb begin
         smult_result = a * b;
@@ -33,7 +34,7 @@ module alu #(parameter N = 8) (
             `RAND:  result = a & b;
             `ROR:   result = a | b;
             `RXOR:  result = a ^ b;
-            `RMUL:  result = smult_result[2*N-2:N-1];
+            `RMLT:  result = smult_result[2*N-2:N-1];
         endcase
     end
 
