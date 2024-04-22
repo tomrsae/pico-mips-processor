@@ -38,20 +38,16 @@ module decoder_test;
         (opcode == `BEQ && !ZF) |-> !pc_rel_branch;
     endproperty
 
-    property BNQandZFsetsPcRelBranch;
-        (opcode == `BNQ && ZF) |-> !pc_rel_branch;
-    endproperty
-
-    property BNQandNotZFdoesNotSetPcRelBranch;
-        (opcode == `BNQ && !ZF) |-> pc_rel_branch;
-    endproperty
-
     property JMPsetsPcRelBranch;
         opcode == `JMP |-> pc_rel_branch;
     endproperty
 
-    property MULTsetsRegWrite;
-        opcode == `MULT |-> (reg_write);
+    property MLTsetsALUandRegWrite;
+        opcode == `MLT |-> (alu_func == `RMLT && reg_write);
+    endproperty
+
+    property MLTIsetsALUandImmediateandRegWrite;
+        opcode == `MLTI |-> (alu_func == `RMLT && immediate && reg_write);
     endproperty
 
     property STINsetsReadInandRegWrite;
@@ -63,7 +59,8 @@ module decoder_test;
     endproperty
 
     initial begin
-        clk = 0;
+        opcode = `NOP;
+        clk = 1;
         forever #5ns clk = ~clk;
     end
 
@@ -81,14 +78,13 @@ module decoder_test;
         #10ns
         ZF = 1;
         #10ns
-        opcode = `BNQ;
-        #10ns
-        opcode = `BNQ;
         ZF = 0;
         #10ns
         opcode = `JMP;
         #10ns
-        opcode = `MULT;
+        opcode = `MLT;
+        #10ns
+        opcode = `MLTI;
         #10ns
         opcode = `STIN;
         #10ns
@@ -113,17 +109,14 @@ module decoder_test;
     assert property (BEQandNotZFdoesNotSetPcRelBranch)
     else $error("BEQandNotZFdoesNotSetPcRelBranch not satisfied");
 
-    assert property (BNQandZFsetsPcRelBranch)
-    else $error("BNQandZFsetsPcRelBranch not satisfied");
-
-    assert property (BNQandNotZFdoesNotSetPcRelBranch)
-    else $error("BNQandNotZFdoesNotSetPcRelBranch not satisfied");
-
     assert property (JMPsetsPcRelBranch)
     else $error("JMPsetsPcRelBranch not satisfied");
 
-    assert property (MULTsetsRegWrite)
-    else $error("MULTsetsRegWrite not satisfied");
+    assert property (MLTsetsALUandRegWrite)
+    else $error("MLTsetsALUandRegWrite not satisfied");
+
+    assert property (MLTIsetsALUandImmediateandRegWrite)
+    else $error("MLTsetsALUandImmediateandRegWrite not satisfied");
 
     assert property (STINsetsReadInandRegWrite)
     else $error("STINsetsReadInandRegWrite not satisfied");

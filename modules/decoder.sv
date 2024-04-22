@@ -1,7 +1,9 @@
 // File: decoder.sv
 // Author: Tommy Sætre
-// Description: Instruction decoder, facilitating relative branching, register- and immediate-based arithmetic and multiplication, as well as I/O
-// Last revision: 23/03/24
+// Description: Instruction decoder, facilitating relative branching,
+//              register- and immediate-based arithmetic and multiplication,
+//              as well as I/O.
+// Last revision: 22/04/24
 
 `include "opcodes.sv"
 `include "alucodes.sv"
@@ -23,15 +25,13 @@ module decoder (
 
         unique case (opcode)
             `NOP : ;
-            `ADD, `SUB : reg_write = 1;
-            `ADDI, `SUBI : begin
+            `ADD, `SUB, `MLT : reg_write = 1;
+            `ADDI, `SUBI, `MLTI : begin
                 reg_write = 1;
                 immediate = 1;
             end
             `BEQ : pc_rel_branch = ZF;
-            `BNQ : pc_rel_branch = ~ZF;
             `JMP : pc_rel_branch = 1;
-            `MULT: reg_write = 1; 
             `STIN: begin
                 reg_write = 1;
                 read_in = 1;

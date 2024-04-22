@@ -10,8 +10,8 @@
 `define ADDI    6'b001010
 `define SUBI    6'b001011
 `define BEQ     6'b010011
-`define BNQ     6'b011011
 `define JMP     6'b001000
-`define MULT    6'b010111
+`define MLT     6'b010111
+`define MLTI    6'b011111
 `define STIN    6'b100000
 `define LOUT    6'b011000
