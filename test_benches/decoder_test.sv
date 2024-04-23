@@ -30,14 +30,6 @@ module decoder_test;
         opcode == `SUBI |-> (alu_func == `RSUB && immediate && reg_write);
     endproperty
 
-    property BEQandZFsetsPcRelBranch;
-        (opcode == `BEQ && ZF) |-> pc_rel_branch;
-    endproperty
-
-    property BEQandNotZFdoesNotSetPcRelBranch;
-        (opcode == `BEQ && !ZF) |-> !pc_rel_branch;
-    endproperty
-
     property JMPsetsPcRelBranch;
         opcode == `JMP |-> pc_rel_branch;
     endproperty
@@ -73,13 +65,6 @@ module decoder_test;
         #10ns
         opcode = `SUBI;
         #10ns
-        opcode = `BEQ;
-        ZF = 0;
-        #10ns
-        ZF = 1;
-        #10ns
-        ZF = 0;
-        #10ns
         opcode = `JMP;
         #10ns
         opcode = `MLT;
@@ -102,12 +87,6 @@ module decoder_test;
 
     assert property (SUBIsetsALUandImmediateandRegWrite)
     else $error("SUBIsetsALUandImmediateandRegWrite not satisfied");
-
-    assert property (BEQandZFsetsPcRelBranch)
-    else $error("BEQandZFsetsPcRelBranch not satisfied");
-
-    assert property (BEQandNotZFdoesNotSetPcRelBranch)
-    else $error("BEQandNotZFdoesNotSetPcRelBranch not satisfied");
 
     assert property (JMPsetsPcRelBranch)
     else $error("JMPsetsPcRelBranch not satisfied");

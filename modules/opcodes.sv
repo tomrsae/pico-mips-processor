@@ -9,7 +9,6 @@
 `define SUB     6'b000011
 `define ADDI    6'b001010
 `define SUBI    6'b001011
-`define BEQ     6'b010011
 `define JMP     6'b001000
 `define MLT     6'b010111
 `define MLTI    6'b011111

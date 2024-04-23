@@ -30,7 +30,6 @@ module decoder (
                 reg_write = 1;
                 immediate = 1;
             end
-            `BEQ : pc_rel_branch = ZF;
             `JMP : pc_rel_branch = 1;
             `LD: begin
                 reg_write = 1;
