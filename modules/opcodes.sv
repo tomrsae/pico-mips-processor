@@ -13,5 +13,5 @@
 `define JMP     6'b001000
 `define MLT     6'b010111
 `define MLTI    6'b011111
-`define STIN    6'b100000
-`define LOUT    6'b011000
+`define LD      6'b100000
+`define ST      6'b011000

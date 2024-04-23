@@ -3,7 +3,7 @@
 // Description:
 //  Top-level module for N-bit picoMIPS processor, capable of reading
 //  from an in_bus to its registers and output to an out_bus from its
-//  registers using the STIN and LOUT instructions respectively.
+//  registers using the LD and ST instructions respectively.
 //  Capable of running programs consisting of MaxProgramSz instructions.
 //  io_handshake is a signal used to progress the program, with the
 //  intenion of it acting as an I/O handshake.
@@ -12,7 +12,6 @@
 module pico_mips #(
     parameter N = 8,
     parameter MaxProgramSz = 32
-    // localparam ProgramAddrSz = $clog2(MaxProgramSz)
 ) (
     input logic [N-1:0] in_bus,
     input logic clk, n_reset, io_handshake,

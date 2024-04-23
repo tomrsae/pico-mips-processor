@@ -32,11 +32,11 @@ module decoder (
             end
             `BEQ : pc_rel_branch = ZF;
             `JMP : pc_rel_branch = 1;
-            `STIN: begin
+            `LD: begin
                 reg_write = 1;
                 read_in = 1;
             end
-            `LOUT: write_out = 1;
+            `ST: write_out = 1;
             default: $error("Opcode not implemented");
         endcase
     end

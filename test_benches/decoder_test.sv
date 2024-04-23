@@ -50,12 +50,12 @@ module decoder_test;
         opcode == `MLTI |-> (alu_func == `RMLT && immediate && reg_write);
     endproperty
 
-    property STINsetsReadInandRegWrite;
-        opcode == `STIN |-> (read_in && reg_write);
+    property LDsetsReadInandRegWrite;
+        opcode == `LD |-> (read_in && reg_write);
     endproperty
 
-    property LOUTsetsWriteOut;
-        opcode == `LOUT |-> write_out;
+    property STsetsWriteOut;
+        opcode == `ST |-> write_out;
     endproperty
 
     initial begin
@@ -86,9 +86,9 @@ module decoder_test;
         #10ns
         opcode = `MLTI;
         #10ns
-        opcode = `STIN;
+        opcode = `LD;
         #10ns
-        opcode = `LOUT;
+        opcode = `ST;
     end
  
     assert property (ADDsetsALUandRegWrite)
@@ -118,10 +118,10 @@ module decoder_test;
     assert property (MLTIsetsALUandImmediateandRegWrite)
     else $error("MLTsetsALUandImmediateandRegWrite not satisfied");
 
-    assert property (STINsetsReadInandRegWrite)
-    else $error("STINsetsReadInandRegWrite not satisfied");
+    assert property (LDsetsReadInandRegWrite)
+    else $error("LDsetsReadInandRegWrite not satisfied");
 
-    assert property (LOUTsetsWriteOut)
-    else $error("LOUTsetsWriteOut not satisfied");
+    assert property (STsetsWriteOut)
+    else $error("STsetsWriteOut not satisfied");
 
 endmodule

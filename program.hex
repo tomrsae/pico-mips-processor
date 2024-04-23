@@ -5,8 +5,8 @@
 
 /// Read inputs
 
-802000 // STIN %01 <-- x1 in register 1
-804000 // STIN %02 <-- y1 in register 2
+802000 // LD %01 <-- x1 in register 1
+804000 // LD %02 <-- y1 in register 2
 
 /// Perform transformation
 
@@ -34,8 +34,8 @@
 
 /// Write to output
 
-600600 // LOUT %06
-600700 // LOUT %07
+600600 // ST %06
+600700 // ST %07
 
 /// Goto first instruction
 
