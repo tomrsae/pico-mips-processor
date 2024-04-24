@@ -17,10 +17,26 @@ initial begin
     address = 1;
     #10ns
     address = 2;
-    # 10ns
+    #10ns
     address = 3;
-    # 10ns
+    #10ns
     address = 4;
+    #10ns
+    address = 5;
+    #10ns
+    address = 6;
+    #10ns
+    address = 7;
+    #10ns
+    address = 8;
+    #10ns
+    address = 9;
+    #10ns
+    address = 10;
+    #10ns
+    address = 11;
+    #10ns
+    address = 12;
 end
 
 endmodule
