@@ -24,16 +24,20 @@ initial begin
     forever #5ns clk = ~clk;
 end
 
+default clocking clock
+    @(posedge clk);
+endclocking
+
 assert property (
-    @(posedge clk) (!rel_branch && !halt |=> addr == $past(addr) + 1)
+    !rel_branch && !halt |=> addr == $past(addr) + 1
 ) else $error("PC did not increment despite relative branching being disabled");
 
 assert property (
-    @(posedge clk) (rel_branch && !halt |=> addr == $past(addr) + offset)
+    rel_branch && !halt |=> addr == $past(addr) + offset
 ) else $error("PC did not add relative branch offset");
 
 assert property (
-    @(posedge clk) (halt |=> addr == $past(addr))
+    halt |=> addr == $past(addr)
 ) else $error("PC did not halt");
 
 initial begin
